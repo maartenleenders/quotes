@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -7,9 +6,9 @@ function App() {
       <header className="App-header">
         <p>Here be the best quotes</p>
       </header>
-	  <div>
-		  hello
-	  </div>
+	  <h1 className="text-3xl font-bold underline">
+      	Hello world!
+	  </h1>
     </div>
   );
 }
