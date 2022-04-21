@@ -13,7 +13,7 @@ import { uniq } from "lodash";
 // }
 
 export default function QuoteItem( { conversation } ) {
-	const backgroundClasses = [ "bg-red-100", "bg-blue-100", "bg-green-100" ];
+	const backgroundClasses = [ "bg-red-100", "bg-blue-100", "bg-fuchsia-100", "bg-teal-100", "bg-indigo-100", "bg-yellow-100","bg-green-100" ];
 
 	let formattedQuote = [];
 	
@@ -27,7 +27,7 @@ export default function QuoteItem( { conversation } ) {
 
 	return (
 	  <section className={ "bg-white overflow-hidden" }>
-		<div className={ `${ backgroundClasses[ Math.floor( Math.random() * backgroundClasses.length ) ] } rounded-lg border border-black mb-2 relative max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8` }>
+		<div className={ `${ backgroundClasses[ Math.floor( Math.random() * backgroundClasses.length ) ] } rounded-lg border border-black mb-4 relative max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8` }>
 		  <div className="relative">
 			<div className="relative lg:ml-10">
 				<svg

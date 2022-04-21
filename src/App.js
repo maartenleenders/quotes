@@ -11809,9 +11809,10 @@ const theQuotes = [
 		"year": 2020,
 		"language": "nl"
 	}
-];
+].reverse();
 
 function App() {
+	const randomQuote = theQuotes[ Math.floor( Math.random() * theQuotes.length ) ];
   return (
     <div className="App">
       <header
@@ -11821,15 +11822,15 @@ function App() {
 			<p
 				className="text-white text-4xl italic leading-6"
 				style={ { fontFamily: "chancery, garamond" } }
-			>{ theQuotes[ Math.floor( Math.random() * theQuotes.length ) ].quote[ 0 ].sentence }</p>
+			>{ randomQuote.quote[ 0 ].sentence }</p>
 			<p
 				className="text-white mt-2 text-2xl italic leading-6"
 				style={ { fontFamily: "chancery, garamond" } }
-			>~ { theQuotes[ Math.floor( Math.random() * theQuotes.length ) ].quote[ 0 ].author }</p>
+			>~ { randomQuote.quote[ 0 ].author }</p>
 		</div>
       </header>
 	  <div className="grid grid-cols-3 gap-2">
-		<div className="col-span-2">
+		<div className="col-span-2 px-12">
 			<QuoteList quotes={ theQuotes } />
 		</div>
 		<div className="text-left mt-6 border-gray-800 border-2 px-9 py-4 rounded-lg bg-white shadow">
