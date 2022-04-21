@@ -34,6 +34,18 @@ const exampleQuotes = [
 				"author": "Jeroen"
 			},
 			{
+				"sentence": "Dat mensen bizar lange zinnen gaan toevoegen.",
+				"author": "Jeroen"
+			},
+			{
+				"sentence": "Dat mensen bizar lange zinnen gaan toevoegen.",
+				"author": "Jeroen"
+			},
+			{
+				"sentence": "Dat mensen bizar lange zinnen gaan toevoegen.",
+				"author": "Jeroen"
+			},
+			{
 				"sentence": "Doe niet zo mal, Jeroen",
 				"author": "Lena"
 			}
