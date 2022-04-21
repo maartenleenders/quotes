@@ -11811,8 +11811,16 @@ const theQuotes = [
 	}
 ].reverse();
 
+function getRandomQuote() {
+	let randomQuote = theQuotes[ Math.floor( Math.random() * theQuotes.length ) ];
+	if ( randomQuote.quote.length > 1 ) {
+		randomQuote = getRandomQuote();
+	}
+	return randomQuote;
+}
+
 function App() {
-	const randomQuote = theQuotes[ Math.floor( Math.random() * theQuotes.length ) ];
+	const randomQuote = getRandomQuote();
   return (
     <div className="App">
       <header
@@ -11833,7 +11841,7 @@ function App() {
 		<div className="col-span-2 px-24 mt-6">
 			<QuoteList quotes={ theQuotes } />
 		</div>
-		<div className="text-left mt-6 border-gray-800 border px-9 py-4 rounded-lg bg-white shadow h-fit">
+		<div className="sticky top-8 text-left mt-6 border-gray-800 border mr-24 px-9 py-4 rounded-lg bg-white shadow h-fit">
 			<AddForm />
 		</div>
 	  </div>
