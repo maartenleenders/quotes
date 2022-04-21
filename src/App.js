@@ -11814,8 +11814,19 @@ const theQuotes = [
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>Here be the best quotes</p>
+      <header
+	  	className="w-full flex items-center justify-center h-[250px] bg-[url('https://picsum.photos/1600/500')] relative bg-[url('https://picsum.photos/1600/500')] bg-center bg-cover bg-no-repeat mb-4"
+	  >
+		<div>
+			<p
+				className="text-white text-4xl italic leading-6"
+				style={ { fontFamily: "chancery, garamond" } }
+			>{ theQuotes[ Math.floor( Math.random() * theQuotes.length ) ].quote[ 0 ].sentence }</p>
+			<p
+				className="text-white mt-2 text-2xl italic leading-6"
+				style={ { fontFamily: "chancery, garamond" } }
+			>~ { theQuotes[ Math.floor( Math.random() * theQuotes.length ) ].quote[ 0 ].author }</p>
+		</div>
       </header>
 	  <div className="grid grid-cols-3 gap-2">
 		<div className="col-span-2">
