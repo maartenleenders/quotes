@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { uniq } from "lodash";
 
 // export default function QuoteItem( { conversation } ) {
@@ -14,23 +13,25 @@ import { uniq } from "lodash";
 // }
 
 export default function QuoteItem( { conversation } ) {
+	const backgroundClasses = [ "bg-red-100", "bg-blue-100", "bg-green-100" ];
+
 	let formattedQuote = [];
 	
 	if ( conversation.quote.length > 1 ) {
 		formattedQuote = conversation.quote.map( ( { sentence, author }, index ) => {
-			return <div className="flex flex-row items-center justify-between"><p className="text-black grow" key={ `quote-${ author }-${ index }`} >{ sentence }</p><p className="text-gray-600 text-base">{ `~ ${author}` }</p></div>
+			return <div className="flex flex-row items-center justify-between"><p className={ `${ index % 2 === 0 ? "text-black" : "text-slate-600" } text-black grow` } key={ `quote-${ author }-${ index }`} >{ sentence }</p><p className="shrink-0 text-gray-600 text-base">{ `~ ${author}` }</p></div>
 		} );
 	} else {
 		formattedQuote = <p className="text-black">{ conversation.quote[ 0 ].sentence }</p>;
 	}
 
 	return (
-	  <section className="bg-white overflow-hidden">
-		<div className="border-2 mb-2 relative max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+	  <section className={ "bg-white overflow-hidden" }>
+		<div className={ `${ backgroundClasses[ Math.floor( Math.random() * backgroundClasses.length ) ] } rounded-lg border border-black mb-2 relative max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8` }>
 		  <div className="relative">
 			<div className="relative lg:ml-10">
 				<svg
-					className="absolute top-0 left-0 transform h-36 w-36 text-indigo-200 opacity-50"
+					className="absolute top-0 left-0 transform h-36 w-36 text-white opacity-50"
 					stroke="currentColor"
 					fill="none"
 					viewBox="0 0 144 144"
