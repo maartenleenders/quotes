@@ -6,8 +6,6 @@ export default function QuoteList( { quotes } ) {
 		<ol>
 			{
 				quotes.map( ( conversation, index ) => {
-					console.table( conversation );
-					console.log( typeof conversation )
 					return (
 						<li key={`quote-${ index }`}>
 							<QuoteItem conversation={ conversation } />

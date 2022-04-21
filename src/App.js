@@ -11820,20 +11820,20 @@ function App() {
 	  >
 		<div>
 			<p
-				className="text-white text-4xl italic leading-6"
+				className="text-white text-4xl italic bg-black/[0.3] p-2"
 				style={ { fontFamily: "chancery, garamond" } }
 			>{ randomQuote.quote[ 0 ].sentence }</p>
 			<p
-				className="text-white mt-2 text-2xl italic leading-6"
+				className="text-white mt-2 text-2xl italic w-fit mx-auto bg-black/[0.3] p-2"
 				style={ { fontFamily: "chancery, garamond" } }
 			>~ { randomQuote.quote[ 0 ].author }</p>
 		</div>
       </header>
 	  <div className="grid grid-cols-3 gap-2">
-		<div className="col-span-2 px-12">
+		<div className="col-span-2 px-24 mt-6">
 			<QuoteList quotes={ theQuotes } />
 		</div>
-		<div className="text-left mt-6 border-gray-800 border-2 px-9 py-4 rounded-lg bg-white shadow">
+		<div className="text-left mt-6 border-gray-800 border px-9 py-4 rounded-lg bg-white shadow h-fit">
 			<AddForm />
 		</div>
 	  </div>
