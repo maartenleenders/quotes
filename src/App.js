@@ -1,6 +1,10 @@
+import { useState, useCallback } from "react";
+import { sortBy } from "lodash";
+
 import AddForm from "./AddForm";
 import QuoteList from "./QuoteList";
 import './App.css';
+import { SortAscendingIcon, SortDescendingIcon } from "@heroicons/react/outline";
 
 const theQuotes = [
 	{
@@ -11809,44 +11813,134 @@ const theQuotes = [
 		"year": 2020,
 		"language": "nl"
 	}
-].reverse();
+];
 
-function getRandomQuote() {
-	let randomQuote = theQuotes[ Math.floor( Math.random() * theQuotes.length ) ];
+function getRandomQuote( quotes ) {
+	let randomQuote = quotes[ Math.floor( Math.random() * theQuotes.length ) ];
 	if ( randomQuote.quote.length > 1 ) {
-		randomQuote = getRandomQuote();
+		randomQuote = getRandomQuote( quotes );
 	}
 	return randomQuote;
 }
 
 function App() {
-	const randomQuote = getRandomQuote();
-  return (
-    <div className="App">
-      <header
-	  	className="w-full flex items-center justify-center h-[250px] bg-[url('https://picsum.photos/1600/500')] relative bg-[url('https://picsum.photos/1600/500')] bg-center bg-cover bg-no-repeat mb-4"
-	  >
-		<div>
-			<p
-				className="text-white text-4xl italic bg-black/[0.3] p-2"
-				style={ { fontFamily: "chancery, garamond" } }
-			>{ randomQuote.quote[ 0 ].sentence }</p>
-			<p
-				className="text-white mt-2 text-2xl italic w-fit mx-auto bg-black/[0.3] p-2"
-				style={ { fontFamily: "chancery, garamond" } }
-			>~ { randomQuote.quote[ 0 ].author }</p>
+	const [ quotes, setQuotes ] = useState( () => sortBy( theQuotes, [ "year" ] ) );
+	const [ sortDescending, setSortDescending ] = useState( "ascending" );
+	const [ filterYear, setFilterYear ] = useState( "" );
+
+	const randomQuote = getRandomQuote( quotes );
+
+	const addQuote = useCallback( ( newQuote ) => {
+		setQuotes( prevQuotes => [ ...prevQuotes, newQuote ] )
+	}, [ setQuotes ] );
+
+	const sortByYear = useCallback( () => {
+		setQuotes( prevQuotes => {
+			const sortedQuotes = sortBy( prevQuotes, [ "year" ] );
+			if ( sortDescending ) {
+				setSortDescending( false );
+				return sortedQuotes.reverse();
+			}
+			setSortDescending( true );
+			return sortedQuotes;
+		} );
+	}, [ sortDescending, setSortDescending ] );
+
+	const filterByYear = useCallback( event => {
+		setFilterYear( event.target.dataset.year );
+	}, [] )
+
+	return (
+		<div className="App">
+		<header
+			className="w-full flex items-center justify-center h-[300px] bg-[url('https://picsum.photos/1600/500')] relative bg-[url('https://picsum.photos/1600/500')] bg-center bg-cover bg-no-repeat mb-4"
+		>
+			<div>
+				<p
+					className="text-white text-4xl italic bg-black/[0.3] p-2"
+					style={ { fontFamily: "chancery, garamond" } }
+				>{ randomQuote.quote[ 0 ].sentence }</p>
+				<p
+					className="text-white mt-2 text-2xl italic w-fit mx-auto bg-black/[0.3] p-2"
+					style={ { fontFamily: "chancery, garamond" } }
+				>- { randomQuote.quote[ 0 ].author }, { randomQuote.year }</p>
+			</div>
+		</header>
+		<div className="flex flex-row justify-center">
+			<button
+				type="button"
+				className="h-auto mt-8 ml-3 inline-flex justify-center py-2 px-4 border shadow-sm text-sm font-medium rounded-md text-black bg-white hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+				onClick={ sortByYear }
+			>
+				<span className="flex flex-row items-center">{ sortDescending ? <SortDescendingIcon className="h-5 mr-2" /> : <SortAscendingIcon className="h-5 mr-2" /> }YEAR</span>
+			</button>
+			<button
+				type="button"
+				className="h-auto mt-8 ml-3 inline-flex justify-center py-2 px-4 border shadow-sm text-sm font-medium rounded-md text-black bg-white hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+				onClick={ filterByYear }
+				data-year=""
+			>
+				ALL YEARS
+			</button>
+			<button
+				type="button"
+				className="h-auto mt-8 ml-3 inline-flex justify-center py-2 px-4 border shadow-sm text-sm font-medium rounded-md text-black bg-white hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+				onClick={ filterByYear }
+				data-year="2017"
+			>
+				2017
+			</button>
+			<button
+				type="button"
+				className="h-auto mt-8 ml-3 inline-flex justify-center py-2 px-4 border shadow-sm text-sm font-medium rounded-md text-black bg-white hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+				onClick={ filterByYear }
+				data-year="2018"
+			>
+				2018
+			</button>
+			<button
+				type="button"
+				className="h-auto mt-8 ml-3 inline-flex justify-center py-2 px-4 border shadow-sm text-sm font-medium rounded-md text-black bg-white hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+				onClick={ filterByYear }
+				data-year="2019"
+			>
+				2019
+			</button>
+			<button
+				type="button"
+				className="h-auto mt-8 ml-3 inline-flex justify-center py-2 px-4 border shadow-sm text-sm font-medium rounded-md text-black bg-white hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+				onClick={ filterByYear }
+				data-year="2020"
+			>
+				2020
+			</button>
+			<button
+				type="button"
+				className="h-auto mt-8 ml-3 inline-flex justify-center py-2 px-4 border shadow-sm text-sm font-medium rounded-md text-black bg-white hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+				onClick={ filterByYear }
+				data-year="2021"
+			>
+				2021
+			</button>
+			<button
+				type="button"
+				className="h-auto mt-8 ml-3 inline-flex justify-center py-2 px-4 border shadow-sm text-sm font-medium rounded-md text-black bg-white hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+				onClick={ filterByYear }
+				data-year="2022"
+			>
+				2022
+			</button>
 		</div>
-      </header>
-	  <div className="grid grid-cols-3 gap-2">
-		<div className="col-span-2 px-24 mt-6">
-			<QuoteList quotes={ theQuotes } />
+		<div className="grid grid-cols-3 gap-2">
+			<div className="col-span-2 px-24 mt-6">
+				<QuoteList quotes={ filterYear ? quotes.filter( item => `${ item.year }` === filterYear ) : quotes } />
+			</div>
+			<div className="sticky top-8 text-left mt-6 border-gray-800 border mr-24 px-9 py-4 rounded-lg bg-white shadow h-fit">
+				<AddForm addQuote={ addQuote }/>
+			</div>
 		</div>
-		<div className="sticky top-8 text-left mt-6 border-gray-800 border mr-24 px-9 py-4 rounded-lg bg-white shadow h-fit">
-			<AddForm />
 		</div>
-	  </div>
-    </div>
-  );
+	);
 }
 
 export default App;

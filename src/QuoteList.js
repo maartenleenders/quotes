@@ -1,7 +1,6 @@
 import QuoteItem from "./QuoteItem";
 
 export default function QuoteList( { quotes } ) {
-	console.log( quotes );
 	return (
 		<ol>
 			{
